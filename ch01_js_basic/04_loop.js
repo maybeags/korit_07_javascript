@@ -68,3 +68,16 @@ console.log(productList[0].name + '의 가격과 ' + productList[2].name  + '의
 productList[2].price) + ' 원 입니다.');
 
 // ; 콜론 안해도 원래 오류 안납니다. 근데 하는게 매너입니다.
+
+let inputCoin = 900;
+let outputList = [];  // 빈 배열을 하나 선언하겠습니다.
+// 이제 inputCoin으로 살 수 있는 음료 목록들을 집어넣도록 할겁니다.
+
+for( let i = 0 ; i < productList.length ; i++ ) {
+  if(inputCoin >= productList[i]["price"]) {
+    // outputList에 element로 추가
+    outputList.push(productList[i]);      // 배열에 데이터를 추가하는 method .push()
+  }
+}
+console.log('살 수 있는 음료 목록 : ' + outputList);
+// 결과값 : 살 수 있는 음료 목록 : [object Object],[object Object],[object Object],[object Object]
