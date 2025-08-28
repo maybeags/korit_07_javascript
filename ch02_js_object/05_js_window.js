@@ -26,5 +26,5 @@ function myStopFunction() {
 
 // 보통 onclick에 사용합니다.
 
-// 함수 호출
+// 함수 호출+
 myFunction();
