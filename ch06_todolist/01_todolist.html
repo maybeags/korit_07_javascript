@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List 실습</title>
   <link rel="stylesheet" href="./01_todolist.css">
-  <script src="./01_todolist.js"></script>
+  <!-- <script src="./01_todolist.js"></script> -->
 </head>
 <body>
   <div class="todo-container">
@@ -28,7 +28,7 @@
         </li>
     </ul>
   </div>
-  <script>
+  <script src="./01_todolist.js">
     // DOM 요소 가져오기 위한 변수 선언 및 초기화
     const todoInput = document.getElementById('todo-input');
     const addBtn = document.getElementById('add-btn');
@@ -88,11 +88,19 @@
 
         // 삭제 버튼 클릭 이벤트
         deleteBtn.addEventListener('click', () => {
-          // splice()를 사용하여 '배열에서 '해당' 항목 제거'
-          todos.splice(index, 1);
-          // DOM에서 제거해야합니다. 즉, li 태그를 하나 날려야해요.
-          li.remove();
-          saveTodos();
+          // 삭제할 항목의 텍스트를 이용해서 배열 내에서 정확한 인덱스를 찾아낼겁니다.
+          // 보통은 index로 내용을 확인하지만 계속 삭제를 하면 index 넘버가 바뀌겠죠
+          // 그래서 input에 입력했던 내용을 근거로 index를 역으로 찾아낼 예정입니다.
+          const itemText = span.textContent;  // 얘를 쓰는 이유는 저희가 .trim() 쓰는 바람에 공백을 날렸기 때문입니다.
+
+          // 배열 내에서의 내용과 span 태그 내에서의 내용이 같은 index를 뽑아내서 itemIndex 변수에 저장
+          const itemIndex = todos.findIndex(item => item.text === itemText);
+
+          if (itemIndex !== -1) { // 일치하는 인덱스가 없으면 -1입니다.
+            todos.splice(itemIndex, 1); // itemIndex에 해당하는 거 element 하나를 삭제
+            li.remove();
+            saveTodos();
+          }
         });
       });
     }
